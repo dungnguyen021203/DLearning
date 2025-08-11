@@ -2,6 +2,12 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+
+    id("com.google.dagger.hilt.android")
+    kotlin("kapt")
+
+    alias(libs.plugins.gms.google.services)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -56,4 +62,67 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // Splash Screen
+    implementation(libs.androidx.core.splashscreen)
+
+    //Image Loading
+    implementation(libs.coil.compose)
+
+    // Others
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.androidx.ui.util)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
+    // Google
+    implementation(libs.firebase.bom)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+    implementation(platform(libs.firebase.bom))
+
+    // DotIndicator
+    implementation("com.tbuonomo:dotsindicator:5.1.0")
+
+    // Lottie
+    implementation("com.airbnb.android:lottie-compose:6.0.0")
+
+    // Zalopay
+    implementation(fileTree(mapOf(
+        "dir" to "C:\\Users\\Admin\\Desktop\\ZaloPayLib",
+        "include" to listOf("*.aar", "*.jar"),
+        "exclude" to listOf("")
+    )))
+
+    // Retrofit
+    // Network
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.kotlinx.serialization.json)
+    implementation (libs.converter.gson)
+
+    // Cloudinary
+    implementation (libs.cloudinary.android.v302)
+
+    // DataStore
+    implementation("androidx.datastore:datastore-preferences:1.1.7")
+
+    //Room
+    val room_version = "2.7.2"
+    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+
 }
