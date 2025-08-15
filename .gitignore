@@ -13,4 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+/vault
 **/google-services.json
