@@ -1,6 +1,7 @@
 package com.example.dlearning.di
 
 import android.content.Context
+import com.example.dlearning.data.datastore.DataStoreRepository
 import com.example.dlearning.data.repository.AuthRepositoryImpl
 import com.example.dlearning.domain.repository.AuthRepository
 import com.example.dlearning.utils.others.GoogleSignInHelper
@@ -33,7 +34,15 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAuthRepository(firebaseAuth: FirebaseAuth, firebaseFirestore: FirebaseFirestore): AuthRepository {
+    fun provideAuthRepository(
+        firebaseAuth: FirebaseAuth,
+        firebaseFirestore: FirebaseFirestore
+    ): AuthRepository {
         return AuthRepositoryImpl(firebaseAuth, firebaseFirestore)
     }
+
+    @Provides
+    @Singleton
+    fun provideDataStoreRepository(@ApplicationContext context: Context) =
+        DataStoreRepository(context = context)
 }
