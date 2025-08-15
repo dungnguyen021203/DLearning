@@ -120,9 +120,9 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.1.7")
 
     //Room
-    val room_version = "2.7.2"
-    implementation("androidx.room:room-runtime:$room_version")
-    ksp("androidx.room:room-compiler:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
+    val roomversion = "2.6.1"
+    implementation("androidx.room:room-runtime:$roomversion")
+    ksp("androidx.room:room-compiler:$roomversion")
+    implementation("androidx.room:room-ktx:$roomversion")
 
 }
