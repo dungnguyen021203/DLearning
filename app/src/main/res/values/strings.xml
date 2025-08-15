@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">DLearning</string>
+    <string name="first_page_onboarding">Unlock a world of knowledge at your fingertips. Study on your schedule — whether at home, on the go, or during your coffee break</string>
+    <string name="second_page_onboarding">Experience learning like never before with quizzes, videos, and hands-on activities designed to keep you motivated</string>
+    <string name="third_page_onboarding">Stay inspired with progress tracking, badges, and milestones as you move closer to mastering your skills</string>
 </resources>
