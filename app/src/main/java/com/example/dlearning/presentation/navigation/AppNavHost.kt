@@ -10,6 +10,7 @@ import com.example.dlearning.presentation.ui.auth.ForgetPasswordScreen
 import com.example.dlearning.presentation.ui.auth.LoginScreen
 import com.example.dlearning.presentation.ui.auth.SignupScreen
 import com.example.dlearning.presentation.ui.home.HomeScreen
+import com.example.dlearning.presentation.ui.onboarding.OnboardingScreen
 import com.example.dlearning.presentation.ui.splash.SplashScreen
 import com.example.dlearning.utils.ui.*
 
@@ -17,7 +18,7 @@ import com.example.dlearning.utils.ui.*
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = ROUTE_SPLASH
+    startDestination: String
 ) {
 
     NavHost(
@@ -39,6 +40,9 @@ fun AppNavHost(
         }
         composable(ROUTE_FORGET_PW) {
             ForgetPasswordScreen(navController = navController)
+        }
+        composable(ROUTE_ONBOARDING) {
+            OnboardingScreen(navController = navController)
         }
     }
 }

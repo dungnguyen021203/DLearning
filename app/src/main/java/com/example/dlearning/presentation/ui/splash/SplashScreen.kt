@@ -17,7 +17,6 @@ import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(viewModel: AuthViewModel? = hiltViewModel(), navController: NavHostController) {
     LaunchedEffect(Unit) {
-        delay(4000)
         val user = viewModel?.currentUser
         if (user != null) {
             navController.navigate(ROUTE_HOME) {
