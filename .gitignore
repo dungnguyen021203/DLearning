@@ -13,5 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
-/vault
+app/src/main/java/com/example/dlearning/utils/vault/
 **/google-services.json
