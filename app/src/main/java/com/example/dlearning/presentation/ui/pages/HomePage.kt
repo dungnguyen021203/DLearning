@@ -1,4 +1,4 @@
-package com.example.dlearning.presentation.ui.home
+package com.example.dlearning.presentation.ui.pages
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,13 +15,17 @@ import com.example.dlearning.utils.ui.ROUTE_HOME
 import com.example.dlearning.utils.ui.ROUTE_LOGIN
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, navController: NavHostController, viewModel: AuthViewModel = hiltViewModel(),) {
+fun HomePage(
+    modifier: Modifier = Modifier,
+    navController: NavHostController,
+    viewModel: AuthViewModel = hiltViewModel(),
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Something", modifier = Modifier.clickable{
+        Text(text = "Something", modifier = Modifier.clickable {
             viewModel.signOut()
             navController.navigate(ROUTE_LOGIN) {
                 popUpTo(ROUTE_HOME) { inclusive = true }
