@@ -1,5 +1,6 @@
 package com.example.dlearning.presentation.ui.pages
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -44,6 +45,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -63,26 +65,51 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.dlearning.presentation.viewmodel.AuthViewModel
+import com.example.dlearning.presentation.viewmodel.GlobalViewModel
 import com.example.dlearning.utils.ui.ROUTE_HOME
 import com.example.dlearning.utils.ui.ROUTE_LOGIN
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
+import com.example.dlearning.common.Resource
+import com.example.dlearning.presentation.components.showToast
+import com.example.dlearning.utils.ui.LoadingCircle
+import com.example.dlearning.utils.ui.LoadingCircleWholePage
 
 @Composable
 fun HomePage(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     viewModel: AuthViewModel = hiltViewModel(),
+    globalViewModel: GlobalViewModel = hiltViewModel()
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Something", modifier = Modifier.clickable {
-            viewModel.signOut()
-            navController.navigate(ROUTE_LOGIN) {
-                popUpTo(ROUTE_HOME) { inclusive = true }
+
+    val globalState by globalViewModel.globalState.collectAsState()
+    val context = LocalContext.current
+
+    globalState.let {
+        when(it) {
+            is Resource.Failure -> {
+                LaunchedEffect(globalState) {
+                    showToast(context = context, message = it.exception.message.toString())
+                }
             }
-        })
+            is Resource.Loading -> LoadingCircleWholePage()
+            is Resource.Success<*> -> {
+                val global = (globalState as Resource.Success).data
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = "${global.totalNumOfQuestions}", modifier = Modifier.clickable {
+                        viewModel.signOut()
+                        navController.navigate(ROUTE_LOGIN) {
+                            popUpTo(ROUTE_HOME) { inclusive = true }
+                        }
+                    })
+                }
+            }
+        }
     }
 }
 
