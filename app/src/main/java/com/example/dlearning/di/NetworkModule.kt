@@ -1,6 +1,8 @@
 package com.example.dlearning.di
 
+import com.example.dlearning.data.remote.api.GlobalApiService
 import com.example.dlearning.domain.repository.CloudinaryRepository
+import com.example.dlearning.utils.endpoint.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,4 +30,12 @@ object NetworkModule {
         return retrofit.create(CloudinaryRepository::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideGlobalApiService(): GlobalApiService {
+        return Retrofit.Builder().baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(GlobalApiService::class.java)
+    }
 }
